@@ -47,6 +47,27 @@ class Resource
     protected $coOwners;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $approved;
+
+    /**
+     * @return mixed
+     */
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+
+    /**
+     * @param mixed $approved
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+    }
+
+    /**
      * @return mixed
      */
     public function getCoOwners()
