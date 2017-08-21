@@ -9,7 +9,7 @@ class ResourcesController extends Controller
 {
 
     /**
-     * @Route("/viewressource/")
+     * @Route("/view/resources/", name="resources_view")
      */
 
     public function showAction(){
