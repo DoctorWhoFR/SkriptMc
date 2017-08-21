@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom du Skript</th>
+            <th>Version</th>
+            <th>Tag</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for skript in skripts %}
+        <tr>
+            <th scope="row">{{ skript.id }}</th>
+            <td>{{ skript.Name }}</td>
+            <td>{{ skript.Version }}</td>
+            <td>{{ skript.Tag }}</td>
+            <td>{{ skript.Description }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

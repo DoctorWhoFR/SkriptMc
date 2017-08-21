@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <form name="form" method="post">
+    {% for forms in form.children %}
+
+        {% if forms.vars.id == "form__token" %}
+        {% else %}
+            <div class="form-group">
+                {% if forms.vars.id == "form_save" %}
+                    <button type="{{ forms.vars.block_prefixes[1] }}" class="{{ forms.vars.attr['class'] }}" id="{{ forms.vars.id }}" name="{{ forms.vars.full_name }}"> {{ forms.vars.label }} </button>
+                {% else %}
+                    <label> {{ forms.vars.label }} </label>
+                    <input type="{{ forms.vars.block_prefixes[1] }}" class="{{ forms.vars.attr['class'] }}" id="{{ forms.vars.id }}" name="{{ forms.vars.full_name }}">
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+
+
+    {% endfor %}
+
+        {{ form_widget(form._token) }}
+    </form>
+
+{% endblock %}
