@@ -52,6 +52,8 @@ class ResourcesController extends Controller
 
     /**
      * @Route("/download/{id}", name="resources_download")
+     * @param Version $version
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function downloadAction(Version $version = null)
     {
@@ -149,7 +151,7 @@ class ResourcesController extends Controller
     }
 
     /**
-     * @Route("/{id}/review", name="resources_new_review")
+     * @Route("/{id}/new/review", name="resources_new_review")
      * @param Version    $id
      * @param Request $request
      * @return Response
@@ -166,6 +168,7 @@ class ResourcesController extends Controller
             $review->setVersion($id);
             $em->persist($review);
             $em->flush();
+
         }
 
         return $this->render("resource/review.html.twig", array(
