@@ -139,6 +139,7 @@ class ResourcesController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($version);
                 $em->flush();
+                return $this->redirectToRoute('resources_view', array('id' => $version->getResource()->getId()));
             }
 
         }
