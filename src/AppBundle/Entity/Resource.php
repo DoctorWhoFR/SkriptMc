@@ -9,13 +9,39 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="resource")
+ */
 class Resource
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
     protected $id;
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $name;
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $version;
+    /**
+     * @ORM\Column(type="array")
+     */
     protected $tag;
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $file;
+    /**
+     * @ORM\Column(type="text")
+     */
     protected $description;
 
     /**
