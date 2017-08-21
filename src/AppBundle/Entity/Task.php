@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 20/08/2017
- * Time: 20:50
- */
-
 namespace AppBundle\Controller;
-
 
 class Task
 {
