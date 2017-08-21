@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Admin
- * Date: 21/08/2017
- * Time: 03:35
- */
-
 namespace AppBundle\Entity;
-
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,26 +15,84 @@ class Resource
      * @ORM\Column(type="integer")
      */
     protected $id;
+
     /**
      * @ORM\Column(type="string")
      */
     protected $name;
+
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $version;
-    /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
      */
     protected $tag;
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $file;
+
     /**
      * @ORM\Column(type="text")
      */
     protected $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Version", mappedBy="resource")
+     */
+    protected $version;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $owner;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $coOwners;
+
+    /**
+     * @return mixed
+     */
+    public function getCoOwners()
+    {
+        return $this->coOwners;
+    }
+
+    /**
+     * @param mixed $coOwners
+     */
+    public function setCoOwners($coOwners)
+    {
+        $this->coOwners = $coOwners;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param mixed $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param mixed $owner
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+    }
 
     /**
      * @return mixed
@@ -79,22 +129,6 @@ class Resource
     /**
      * @return mixed
      */
-    public function getVersion()
-    {
-        return $this->version;
-    }
-
-    /**
-     * @param mixed $version
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTag()
     {
         return $this->tag;
@@ -106,22 +140,6 @@ class Resource
     public function setTag($tag)
     {
         $this->tag = $tag;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param mixed $file
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
     }
 
     /**
@@ -139,7 +157,5 @@ class Resource
     {
         $this->description = $description;
     }
-
-
 
 }
