@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom du Skript</th>
+            <th>Voir</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for skript in skripts %}
+        <tr>
+            <th>{{ skript.id }}</th>
+            <td>{{ skript.name }}</td>
+            <td><a href="{{ path('resources_view', {id: skript.id}) }}" class="btn btn-primary btn-sm">Voir</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

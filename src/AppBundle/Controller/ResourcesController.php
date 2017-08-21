@@ -18,28 +18,39 @@ class ResourcesController extends Controller
 {
 
     /**
-     * @Route("/view", name="resources_view")
+     * @Route("/view", name="resources_index")
      */
-
     public function showAction()
     {
-
         $ressources = $this
             ->getDoctrine()
             ->getRepository("AppBundle:Resource")
             ->findAll();
 
-        return $this->render('resource/view.html.twig', array(
+        return $this->render('resource/index.html.twig', array(
             'skripts' => $ressources
         ));
     }
+
+    /**
+     * @Route("/view/{id}", name="resources_view")
+     */
+    public function viewAction(Resource $resource = null)
+    {
+        if (!$resource)
+            return $this->redirectToRoute('resources_view');
+
+        return $this->render('resource/view.html.twig', array(
+            'resource' => $resource
+        ));
+    }
+
 
     /**
      * @Route("/new", name="resources_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-
     public function newAction(Request $request)
     {
         $resource = new Resource();
@@ -64,7 +75,6 @@ class ResourcesController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-
     public function newVersionAction(Resource $id, Request $request)
     {
         $version = new Version();
