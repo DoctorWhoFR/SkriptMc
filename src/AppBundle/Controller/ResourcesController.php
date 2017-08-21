@@ -49,7 +49,7 @@ class ResourcesController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($resource);
             $em->flush();
-            return $this->redirectToRoute('resources_new2', array('id' => $resource->getId()));
+            return $this->redirectToRoute('resources_new_version', array('id' => $resource->getId()));
         }
 
         return $this->render('resource/new.html.twig', array(
@@ -58,13 +58,13 @@ class ResourcesController extends Controller
     }
 
     /**
-     * @Route("/new2/{id}", name="resources_new2")
+     * @Route("/{id}/new/version", name="resources_new_version")
      * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
 
-    public function newAction2(Resource $id, Request $request)
+    public function newVersionAction(Resource $id, Request $request)
     {
         $version = new Version();
         $form = $this->createForm('AppBundle\Form\VersionType', $version);
@@ -77,7 +77,7 @@ class ResourcesController extends Controller
             $em->flush();
         }
 
-        return $this->render('resource/new2.html.twig', array(
+        return $this->render('resource/version.html.twig', array(
             'forms' => $form->createView()
         ));
     }
