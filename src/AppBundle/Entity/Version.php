@@ -28,7 +28,7 @@ class Version
     protected $changelog;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
     protected $file;
 
