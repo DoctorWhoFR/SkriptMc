@@ -5,6 +5,7 @@ use AppBundle\Entity\Resource;
 use AppBundle\Entity\Version;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -34,7 +35,7 @@ class ResourcesController extends Controller
     }
 
     /**
-     * @Route("/new1", name="resources_new1")
+     * @Route("/new", name="resources_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -71,15 +72,17 @@ class ResourcesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $file = $version->getFile();
-            dump($file);
 
-            $em = $this->getDoctrine()->getManager();
-            $version->setResource($id);
-            $em->persist($version);
-            $em->flush();
-
+            if (!in_array($file->guessExtension(), ['txt', 'zip']) && !in_array($file->getExtension(), ['sk', 'zip'])) {
+                $error = new FormError('Le fichier passé n\'est pas au bon format');
+                $form->addError($error);
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $version->setResource($id);
+                $em->persist($version);
+                $em->flush();
+            }
 
         }
 
