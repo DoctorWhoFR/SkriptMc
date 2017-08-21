@@ -71,10 +71,16 @@ class ResourcesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $version->getFile();
+            dump($file);
+
             $em = $this->getDoctrine()->getManager();
             $version->setResource($id);
             $em->persist($version);
             $em->flush();
+
+
         }
 
         return $this->render('resource/version.html.twig', array(

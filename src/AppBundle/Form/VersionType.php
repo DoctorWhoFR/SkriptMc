@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Version;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,7 @@ class VersionType extends AbstractType
         $builder
             ->add('Version', TextType::class, array('label' => 'Version'))
             ->add('Changelog', TextType::class, array('label' => 'Changelog'))
-            ->add('File', TextType::class, array('label' => 'File'));
+            ->add('File', FileType::class, array('label' => 'File'));
     }
 
     public function configureOptions(OptionsResolver $resolver)
