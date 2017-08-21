@@ -5,7 +5,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class ViewRessourceController extends Controller
+class ResourcesController extends Controller
 {
 
     /**
