@@ -23,18 +23,23 @@ class Review
      * @ORM\Column(type="integer")
      */
     protected $id;
+
     /**
      * @ORM\Column(type="string")
      */
     protected $owner;
+
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Version", inversedBy="resource")
+     * @ORM\JoinColumn(name="version_id", referencedColumnName="id")
      */
     protected $version;
+
     /**
      * @ORM\Column(type="string")
      */
     protected $content;
+
     /**
      * @ORM\Column(type="string")
      */

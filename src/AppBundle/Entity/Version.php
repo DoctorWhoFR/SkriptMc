@@ -41,6 +41,11 @@ class Version
     protected $resource;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="version")
+     */
+    protected $reviews;
+
+    /**
      * @return mixed
      */
     public function getResource()

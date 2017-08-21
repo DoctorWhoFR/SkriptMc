@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="ResourceRepository")
+ * @ORM\Entity
  * @ORM\Table(name="resource")
  */
 class Resource
