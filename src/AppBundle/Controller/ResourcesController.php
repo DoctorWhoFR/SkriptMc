@@ -64,7 +64,7 @@ class ResourcesController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
 
-    public function newAction2($id, Request $request)
+    public function newAction2(Resource $id, Request $request)
     {
         $version = new Version();
         $form = $this->createForm('AppBundle\Form\VersionType', $version);
