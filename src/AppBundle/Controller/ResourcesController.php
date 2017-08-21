@@ -38,6 +38,8 @@ class ResourcesController extends Controller
 
     /**
      * @Route("/view/{id}", name="resources_view")
+     * @param Resource $resource
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Resource $resource = null)
     {
