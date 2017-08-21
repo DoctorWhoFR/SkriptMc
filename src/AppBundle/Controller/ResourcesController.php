@@ -78,8 +78,18 @@ class ResourcesController extends Controller
                 $error = new FormError('Le fichier passé n\'est pas au bon format');
                 $form->addError($error);
             } else {
-                $em = $this->getDoctrine()->getManager();
+
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('brochures_directory'),
+                    $fileName
+                );
+
+                $version->setFile($fileName);
                 $version->setResource($id);
+
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($version);
                 $em->flush();
             }
