@@ -105,16 +105,18 @@ class Version
     /**
      * @return mixed
      */
-    public function getCode()
+    public function getFile()
     {
-        return $this->code;
+        return $this->file;
     }
 
     /**
-     * @param mixed $code
+     * @param mixed $file
      */
-    public function setCode($code)
+    public function setFile($file)
     {
-        $this->code = $code;
+        $this->file = $file;
     }
+
+
 }

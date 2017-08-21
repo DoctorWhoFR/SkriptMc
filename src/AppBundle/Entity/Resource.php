@@ -42,7 +42,7 @@ class Resource
     protected $owner;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="array", nullable=true)
      */
     protected $coOwners;
 
