@@ -37,7 +37,7 @@ class Resource
     protected $version;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $owner;
 

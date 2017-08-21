@@ -18,7 +18,7 @@ class Version
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $version;
 
@@ -28,7 +28,7 @@ class Version
     protected $changelog;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $file;
 

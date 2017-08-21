@@ -3,29 +3,29 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResourceType extends AbstractType
+class VersionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'Nom du Skript'))
-            ->add('description', TextType::class, array('label' => 'Desription'));
+            ->add('Version', TextType::class, array('label' => 'Version'))
+            ->add('Changelog', TextType::class, array('label' => 'Changelog'))
+            ->add('File', TextType::class, array('label' => 'File'));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Resource'
+            'data_class' => 'AppBundle\Entity\Version'
         ));
     }
 
     public function getBlockPrefix()
     {
-        return 'app_bundle_resource_type';
+        return 'app_bundle_version_type';
     }
 }
