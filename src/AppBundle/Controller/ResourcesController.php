@@ -45,8 +45,11 @@ class ResourcesController extends Controller
         if (!$resource)
             return $this->redirectToRoute('resources_view');
 
+        $review = $this->getDoctrine()->getRepository("AppBundle:Review")->findAll();
+
         return $this->render('resource/view.html.twig', array(
-            'resource' => $resource
+            'resource' => $resource,
+            'reviews' => $review
         ));
     }
 
@@ -167,8 +170,10 @@ class ResourcesController extends Controller
             $em = $this->getDoctrine()->getManager();
             $review->setVersion($id);
             $em->persist($review);
+
             $em->flush();
 
+            return $this->redirectToRoute("resources_view", array('id' => $id->getResource()->getId()));
         }
 
         return $this->render("resource/review.html.twig", array(
@@ -176,5 +181,7 @@ class ResourcesController extends Controller
         ));
 
     }
+
+
 
 }

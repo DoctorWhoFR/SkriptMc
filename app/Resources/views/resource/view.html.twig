@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    <br>
+
     <h3>{{ resource.name }}</h3>
     <p>{{ resource.description }}</p>
     <h4>Version : </h4>
@@ -9,5 +11,17 @@
         <b>{{ version.version }}</b> : {{ version.changelog }} <a href="{{ path('resources_download', {id: version.id}) }}" class="btn btn-success btn-sm">Télécharger</a> <a href="{{ path('resources_new_review', {id: version.id}) }}" class="btn btn-primary btn-sm">Faire une Review</a>
         <hr>
     {% endfor %}
+
+
+    <h4>Review:</h4>
+
+    {% for review in reviews %}
+
+        <b>Auteur: Max13480 <span style="font-size: 10px">[{{ review.version.version }}]</span></b> <p>{{ review.content }} <strong>{{ review.note }}/5</strong></p>
+
+        <hr>
+
+    {% endfor %}
+    {{ dump(reviews) }}
 
 {% endblock %}
