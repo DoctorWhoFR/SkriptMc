@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Resource;
+use AppBundle\Entity\Review;
 use AppBundle\Entity\Version;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -147,5 +148,23 @@ class ResourcesController extends Controller
         ));
     }
 
+    /**
+     * @Route("/{id}/review", name="resources_new_review")
+     * @param Version    $id
+     * @param Request $request
+     * @return Response
+     */
+
+    public function newReviewAction(Version $id, Request $request){
+
+        $review = new Review();
+        $forms = $this->createForm('AppBundle\Form\ReviewType', $review);
+        $forms->handleRequest($request);
+
+        return $this->render("resource/review.html.twig", array(
+            "forms" => $forms->createView()
+        ));
+
+    }
 
 }
