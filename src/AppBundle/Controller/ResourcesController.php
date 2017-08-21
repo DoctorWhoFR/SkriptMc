@@ -13,18 +13,14 @@ class ResourcesController extends Controller
      */
 
     public function showAction(){
-        define('DB_HOST', 'localhost');
-        define('DB_NAME', 'skriptmc');
-        define('DB_USERNAME', 'root');
-        define('DB_PASSWORD', '');
-        $odb = new \PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $requete = $odb->prepare("SELECT * FROM ressources");
-        $requete->execute();
-        $requete -> fetch(\PDO::FETCH_OBJ);
+        $ressources = $this
+            ->getDoctrine()
+            ->getRepository("AppBundle:Resource")
+            ->findAll();
 
-        return $this->render('ressources/viewressource.html.twig', array(
-            'skripts' => $requete
+        return $this->render(':Resource:View.html.twig', array(
+            'skripts' => $ressources
         ));
     }
 

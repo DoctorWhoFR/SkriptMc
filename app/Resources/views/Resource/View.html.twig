@@ -8,18 +8,16 @@
             <th>#</th>
             <th>Nom du Skript</th>
             <th>Version</th>
-            <th>Tag</th>
             <th>Description</th>
         </tr>
         </thead>
         <tbody>
         {% for skript in skripts %}
         <tr>
-            <th scope="row">{{ skript.id }}</th>
-            <td>{{ skript.Name }}</td>
-            <td>{{ skript.Version }}</td>
-            <td>{{ skript.Tag }}</td>
-            <td>{{ skript.Description }}</td>
+            <th>{{ skript.id }}</th>
+            <td>{{ skript.name }}</td>
+            <td>{{ skript.version }}</td>
+            <td>{{ skript.description }}</td>
         </tr>
         {% endfor %}
         </tbody>
