@@ -40,9 +40,15 @@ class ResourcesController extends Controller
 
     public function newAction(Request $request)
     {
-        $Resource = new Resource();
-        $form = $this->createForm('AppBundle\Form\ResourceType', $Resource);
+        $resource = new Resource();
+        $form = $this->createForm('AppBundle\Form\ResourceType', $resource);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($resource);
+            $em->flush();
+        }
 
         return $this->render('resource/new.html.twig', array(
             'forms' => $form->createView()
