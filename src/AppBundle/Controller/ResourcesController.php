@@ -74,7 +74,7 @@ class ResourcesController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $version->getFile();
 
-            if (!in_array($file->guessExtension(), ['txt', 'zip']) && !in_array($file->getExtension(), ['sk', 'zip'])) {
+            if (!in_array($file->guessExtension(), ['txt', 'zip']) || !in_array($file->getExtension(), ['sk', 'zip'])) {
                 $error = new FormError('Le fichier passé n\'est pas au bon format');
                 $form->addError($error);
             } else {
