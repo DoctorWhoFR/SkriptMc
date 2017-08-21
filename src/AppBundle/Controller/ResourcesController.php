@@ -161,6 +161,13 @@ class ResourcesController extends Controller
         $forms = $this->createForm('AppBundle\Form\ReviewType', $review);
         $forms->handleRequest($request);
 
+        if ($forms->isSubmitted() && $forms->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $review->setVersion($id);
+            $em->persist($review);
+            $em->flush();
+        }
+
         return $this->render("resource/review.html.twig", array(
             "forms" => $forms->createView()
         ));
