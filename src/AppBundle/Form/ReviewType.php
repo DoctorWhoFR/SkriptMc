@@ -13,8 +13,8 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Review', TextType::class, array('label' => 'Votre Review'))
-            ->add('Note', TextType::class, array('label' => 'Votre Note'));
+            ->add('content', TextType::class, array('label' => 'Votre Review'))
+            ->add('note', TextType::class, array('label' => 'Votre Note'));
     }
 
     public function configureOptions(OptionsResolver $resolver)
