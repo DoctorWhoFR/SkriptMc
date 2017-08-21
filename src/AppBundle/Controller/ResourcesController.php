@@ -5,8 +5,12 @@ use AppBundle\Entity\Resource;
 use AppBundle\Entity\Version;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * Class ResourcesController
@@ -45,6 +49,36 @@ class ResourcesController extends Controller
         ));
     }
 
+    /**
+     * @Route("/download/{id}", name="resources_download")
+     */
+    public function downloadAction(Version $version = null)
+    {
+        if (!$version)
+            return $this->redirectToRoute('resources_view');
+
+        $file = file_get_contents($this->getParameter('upload_directory').'/'.$version->getFile());
+        $extension = explode('.', $this->getParameter('upload_directory').'/'.$version->getFile())[1];
+        $response = new Response($file);
+
+        if($extension == 'zip') {
+            $response->headers->set('Content-Type', 'application/octet-stream');
+            $extension = 'zip';
+        } else {
+            $response->headers->set('Content-Type', 'text/plain');
+            $extension = 'sk';
+        }
+
+        $fileName = $version->getResource()->getName().'_'.$version->getVersion().'.'.$extension;
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $fileName
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
 
     /**
      * @Route("/new", name="resources_new")
@@ -84,7 +118,8 @@ class ResourcesController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $version->getFile();
 
-            if (!in_array($file->guessExtension(), ['txt', 'zip']) || !in_array($file->getExtension(), ['sk', 'zip'])) {
+
+            if (!in_array($file->guessExtension(), ['txt', 'zip']) || !in_array($file->getClientOriginalExtension(), ['sk', 'zip'])) {
                 $error = new FormError('Le fichier passé n\'est pas au bon format');
                 $form->addError($error);
             } else {
@@ -92,7 +127,7 @@ class ResourcesController extends Controller
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
                 $file->move(
-                    $this->getParameter('brochures_directory'),
+                    $this->getParameter('upload_directory'),
                     $fileName
                 );
 

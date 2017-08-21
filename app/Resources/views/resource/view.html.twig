@@ -6,8 +6,7 @@
     <p>{{ resource.description }}</p>
     <h4>Version : </h4>
     {% for version in resource.version %}
-        <b>{{ version.version }}</b> : {{ version.changelog }} <br>
-        {{ version.file }}
+        <b>{{ version.version }}</b> : {{ version.changelog }} <a href="{{ path('resources_download', {id: version.id}) }}" class="btn btn-success btn-sm">Télécharger</a>
         <hr>
     {% endfor %}
 
