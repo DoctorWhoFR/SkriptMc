@@ -4,12 +4,17 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class ResourcesController
+ * @package AppBundle\Controller
+ * @Route("/resources")
+ */
 
 class ResourcesController extends Controller
 {
 
     /**
-     * @Route("/view/resources/", name="resources_view")
+     * @Route("/view", name="resources_view")
      */
 
     public function showAction(){
@@ -22,6 +27,14 @@ class ResourcesController extends Controller
         return $this->render(':Resource:View.html.twig', array(
             'skripts' => $ressources
         ));
+    }
+
+    /**
+     * @Route("/new", name="resources_view")
+     */
+
+    public function newAction(){
+
     }
 
 
