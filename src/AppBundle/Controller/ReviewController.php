@@ -18,7 +18,7 @@ class ReviewController extends Controller
      * @return Response
      */
 
-    public function newReviewAction(Version $id = null, Request $request){
+    public function newAction(Version $id = null, Request $request){
 
         $review = new Review();
         $forms = $this->createForm('AppBundle\Form\ReviewType', $review);
@@ -46,7 +46,7 @@ class ReviewController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
 
-    public function newDeleteReview(Review $id)
+    public function deleteAction(Review $id)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($id);
@@ -57,24 +57,26 @@ class ReviewController extends Controller
 
     /**
      * @Route("/{id}/edit/review", name="resource_edit_review")
-     * @param Review $id
+     * @param Review $review
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
+     * @internal param Review $id
      */
 
-    public function newEditReview(Review $id, Request $request)
+    public function editAction(Review $review = null, Request $request)
     {
+        if (!$review)
+            return $this->redirectToRoute('resources_index');
 
-        $review = $id;
-        $forms = $this->createForm('AppBundle\Form\ReviewType', $id);
+        $forms = $this->createForm('AppBundle\Form\ReviewType', $review);
         $forms->handleRequest($request);
 
         if ($forms->isSubmitted() && $forms->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->update($review);
+            $em->persist($review);
             $em->flush();
 
-            return $this->redirectToRoute("resources_index");
+            return $this->redirectToRoute("resources_view", ['id' => $review->getVersion()->getResource()->getId()]);
         }
 
         return $this->render("reviews/new.html.twig", array(
