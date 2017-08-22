@@ -26,6 +26,8 @@
                             <h6 class="card-subtitle mb-2 text-muted"><strong>{{ review.note|rating }}</strong></h6>
                             <p class="card-text">{{ review.content }}</p>
                             <a href="{{ path('resource_delete_review', {id: review.id}) }}" class="btn-sm btn-danger">Supprimer la Review</a>
+                            <br><br>
+                            <a href="{{ path('resource_edit_review', {id: review.id}) }}" class="btn-sm btn-primary">Editer la Review</a>
                         </div>
                     </div>
 

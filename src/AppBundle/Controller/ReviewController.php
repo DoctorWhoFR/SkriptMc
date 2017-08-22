@@ -54,4 +54,33 @@ class ReviewController extends Controller
 
         return $this->redirectToRoute("resources_index");
     }
+
+    /**
+     * @Route("/{id}/edit/review", name="resource_edit_review")
+     * @param Review $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+
+    public function newEditReview(Review $id, Request $request)
+    {
+
+        $review = $id;
+        $forms = $this->createForm('AppBundle\Form\ReviewType', $id);
+        $forms->handleRequest($request);
+
+        if ($forms->isSubmitted() && $forms->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->update($review);
+            $em->flush();
+
+            return $this->redirectToRoute("resources_index");
+        }
+
+        return $this->render("reviews/new.html.twig", array(
+            "forms" => $forms->createView()
+        ));
+
+
+    }
 }
