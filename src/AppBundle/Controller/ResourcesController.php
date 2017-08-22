@@ -114,6 +114,7 @@ class ResourcesController extends Controller
                 $resource->setImage($fileName);
 
                 $em = $this->getDoctrine()->getManager();
+                $resource->setApproved(false);
                 $em->persist($resource);
                 $em->flush();
 
@@ -127,4 +128,58 @@ class ResourcesController extends Controller
         ));
     }
 
+    /**
+     * @Route("/{id}/approved", name="resource_approved")
+     * @param Resource $resource
+     * @return Response
+     */
+
+    public function ApprovedResource(Resource $resource)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $resource->setApproved(true);
+        $em->persist($resource);
+        $em->flush();
+
+        return $this->redirectToRoute("resources_view", array('id' => $resource->getId()));
+    }
+
+    /**
+     * @Route("/{id}/remove", name="resource_remove")
+     * @param Resource $resource
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+
+    public function RemoveResource(Resource $resource)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($resource);
+        $em->flush();
+        return $this->redirectToRoute("resources_index");
+    }
+
+    /**
+     * @Route("/{id}/edit", name="resource_edit")
+     * @param Resource $resource
+     * @param Request $request
+     * @return Response
+     */
+
+    public function EditResource(Resource $resource, Request $request)
+    {
+        $forms=$this->createForm('AppBundle\Form\ResourceType', $resource);
+        $forms->handleRequest($request);
+
+        if ($forms->isSubmitted() && $forms->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($resource);
+            $em->flush();
+        }
+
+        return $this->render('resource/new.html.twig', array(
+            "forms" => $forms->createView()
+        ));
+
+    }
 }

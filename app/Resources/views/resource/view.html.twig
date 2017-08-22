@@ -18,8 +18,6 @@
                 <h4>Review:</h4>
 
                 {% for review in reviews %}
-                        {#<b>Auteur:  <span style="font-size: 10px">[{{ review.version.version }}]</span></b> <p> </p>#}
-
 
                     <div class="card" style="width: 20rem;">
                         <div class="card-body">
@@ -28,10 +26,9 @@
                             <p class="card-text">{{ review.content }}</p>
                             <a href="{{ path('resource_delete_review', {id: review.id}) }}" class="btn-sm btn-danger">Supprimer la Review</a>
                             <br><br>
-                            <a href="{{ path('resource_edit_review', {id: review.id}) }}" class="btn-sm btn-primary">Editer la Review</a>
+                            <a href="{{ path('resource_edit', {id: review.id}) }}" class="btn-sm btn-primary">Editer la Review</a>
                         </div>
                     </div>
-
 
                 {% endfor %}
             </div>

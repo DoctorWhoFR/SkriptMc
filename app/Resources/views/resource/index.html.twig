@@ -11,6 +11,7 @@
                         <th>#</th>
                         <th>Nom du Skript</th>
                         <th>Voir</th>
+                        <th>Outils</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -18,7 +19,12 @@
                         <tr>
                             <th>{{ skript.id }}</th>
                             <td>{{ skript.name }}</td>
-                            <td><a href="{{ path('resources_view', {id: skript.id}) }}" class="btn btn-primary btn-sm">Voir</a></td>
+                            {% if skript.approved == false %}
+                                <td><a href="{{ path('resource_approved', {id: skript.id}) }}" class="btn btn-success btn-sm">Approuver</a></td>
+                            {% else %}
+                                <td><a href="{{ path('resources_view', {id: skript.id}) }}" class="btn btn-dark btn-sm">Voir</a></td>
+                            {% endif %}
+                            <td><a href="{{ path('resource_remove', {id: skript.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>&nbsp;&nbsp;<a href="{{ path('resource_edit', {id: skript.id}) }}" class="btn btn-primary btn-sm">Editer</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
