@@ -3,20 +3,25 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Version;
+use AppBundle\Entity\Resource;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class VersionController
+ * @package AppBundle\Controller
+ */
 class VersionController extends Controller
 {
     /**
-     * @Route("/{id}/new/version", name="resources_new_version")
+     * @Route("/resources/{id}/new/version", name="resources_new_version")
      * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newVersionAction(Resource $id, Request $request)
+    public function newAction(Resource $id, Request $request)
     {
         $version = new Version();
         $form = $this->createForm('AppBundle\Form\VersionType', $version);
