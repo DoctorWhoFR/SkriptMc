@@ -8,12 +8,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param $name
      * @Route("/", name="home")
      */
     public function indexAction()
     {
-        return $this->render('index.html.twig');
+        $ressources = $this
+            ->getDoctrine()
+            ->getRepository("AppBundle:Resource")
+            ->findAll();
+
+        return $this->render('index.html.twig', array(
+            "ressources" => $ressources
+        ));
     }
 }
