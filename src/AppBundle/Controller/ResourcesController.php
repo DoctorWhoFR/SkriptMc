@@ -134,7 +134,7 @@ class ResourcesController extends Controller
      * @return Response
      */
 
-    public function ApprovedResource(Resource $resource)
+    public function approveResource(Resource $resource)
     {
         $em = $this->getDoctrine()->getManager();
         $resource->setApproved(true);

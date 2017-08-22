@@ -18,7 +18,11 @@ class VersionType extends AbstractType
         $builder
             ->add('version', NumberType::class, array('label' => 'Version'))
             ->add('changelog', TextareaType::class, array('label' => 'Changelog'))
-            ->add('file', FileType::class, array('label' => 'Fichier (.sk et .zip acceptés)'));
+            ->add('file', FileType::class,
+                array(
+                    'label' => 'Fichier (.sk et .zip acceptés)',
+                    'data_class' => null
+                ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

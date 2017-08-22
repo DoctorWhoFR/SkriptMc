@@ -16,7 +16,11 @@ class ResourceType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array('label' => 'Nom de la ressource'))
-            ->add('image', FileType::class, array('label' => 'Logo de votre ressource'))
+            ->add('image', FileType::class,
+                array(
+                    'label' => 'Logo de votre ressource',
+                    'data_class' => null
+                ))
             ->add('description', TextareaType::class, array('label' => 'Description'));
     }
 
