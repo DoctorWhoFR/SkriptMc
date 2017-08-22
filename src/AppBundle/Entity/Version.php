@@ -41,7 +41,7 @@ class Version
     protected $resource;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="version")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="version", cascade={"remove"})
      */
     protected $reviews;
 
@@ -124,6 +124,23 @@ class Version
     {
         $this->file = $file;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param mixed $reviews
+     */
+    public function setReviews($reviews)
+    {
+        $this->reviews = $reviews;
+    }
+
 
 
 }

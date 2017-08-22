@@ -32,7 +32,7 @@ class Resource
     protected $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Version", mappedBy="resource")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Version", mappedBy="resource", cascade={"remove"})
      */
     protected $version;
 

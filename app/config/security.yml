@@ -1,8 +1,6 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
+
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
             memory: ~
@@ -17,7 +15,5 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                form_login:
-                    csrf_token_generator: security.csrf.token_manager
-
+                csrf_token_generator: security.csrf.token_manager
 

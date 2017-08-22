@@ -49,6 +49,17 @@ class ReviewController extends Controller
     public function deleteAction(Review $id)
     {
         $em = $this->getDoctrine()->getManager();
+
+//        foreach ($id->getVersion() as $version) {
+//            foreach ($version->getReviews() as $review) {
+//                $em->remove($review);
+//                $em->flush();
+//            }
+//
+//            $em->remove($version);
+//            $em->flush();
+//        }
+
         $em->remove($id);
         $em->flush();
 
