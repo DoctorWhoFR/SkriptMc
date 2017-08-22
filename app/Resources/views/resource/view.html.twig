@@ -2,26 +2,35 @@
 
 {% block body %}
 
-    <br>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>{{ resource.name }}</h3>
+                <p>{{ resource.description|markdown }}</p>
+                <h4>Version : </h4>
+                {% for version in resource.version %}
+                    <b>{{ version.version }}</b> : {{ version.changelog }} <a href="{{ path('resources_download', {id: version.id}) }}" class="btn btn-success btn-sm">Télécharger</a> {% if loop.last %}<a href="{{ path('review_new', {id: version.id}) }}" class="btn btn-primary btn-sm">Faire une Review</a>{% endif %}
+                    <hr>
+                {% endfor %}
 
-    <h3>{{ resource.name }}</h3>
-    <p>{{ resource.description }}</p>
-    <h4>Version : </h4>
-    {% for version in resource.version %}
-        <b>{{ version.version }}</b> : {{ version.changelog }} <a href="{{ path('resources_download', {id: version.id}) }}" class="btn btn-success btn-sm">Télécharger</a> <a href="{{ path('resources_new_review', {id: version.id}) }}" class="btn btn-primary btn-sm">Faire une Review</a>
-        <hr>
-    {% endfor %}
+
+                <h4>Review:</h4>
+
+                {% for review in reviews %}
+                        {#<b>Auteur:  <span style="font-size: 10px">[{{ review.version.version }}]</span></b> <p> </p>#}
 
 
-    <h4>Review:</h4>
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h4 class="card-title">Max13480</h4>
+                            <h6 class="card-subtitle mb-2 text-muted"><strong>{{ review.note|rating }}</strong></h6>
+                            <p class="card-text">{{ review.content }}</p>
+                        </div>
+                    </div>
 
-    {% for review in reviews %}
 
-        <b>Auteur: Max13480 <span style="font-size: 10px">[{{ review.version.version }}]</span></b> <p>{{ review.content }} <strong>{{ review.note }}/5</strong></p>
-
-        <hr>
-
-    {% endfor %}
-    {{ dump(reviews) }}
-
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

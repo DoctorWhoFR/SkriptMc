@@ -1,24 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Nom du Skript</th>
-            <th>Voir</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for skript in skripts %}
-        <tr>
-            <th>{{ skript.id }}</th>
-            <td>{{ skript.name }}</td>
-            <td><a href="{{ path('resources_view', {id: skript.id}) }}" class="btn btn-primary btn-sm">Voir</a></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    <div class="container" style="margin-top: 50px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Les dernières ressources</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom du Skript</th>
+                        <th>Voir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for skript in skripts %}
+                        <tr>
+                            <th>{{ skript.id }}</th>
+                            <td>{{ skript.name }}</td>
+                            <td><a href="{{ path('resources_view', {id: skript.id}) }}" class="btn btn-primary btn-sm">Voir</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

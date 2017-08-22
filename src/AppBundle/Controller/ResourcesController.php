@@ -153,35 +153,4 @@ class ResourcesController extends Controller
         ));
     }
 
-    /**
-     * @Route("/{id}/new/review", name="resources_new_review")
-     * @param Version    $id
-     * @param Request $request
-     * @return Response
-     */
-
-    public function newReviewAction(Version $id, Request $request){
-
-        $review = new Review();
-        $forms = $this->createForm('AppBundle\Form\ReviewType', $review);
-        $forms->handleRequest($request);
-
-        if ($forms->isSubmitted() && $forms->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $review->setVersion($id);
-            $em->persist($review);
-
-            $em->flush();
-
-            return $this->redirectToRoute("resources_view", array('id' => $id->getResource()->getId()));
-        }
-
-        return $this->render("resource/review.html.twig", array(
-            "forms" => $forms->createView()
-        ));
-
-    }
-
-
-
 }

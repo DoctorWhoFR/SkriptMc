@@ -1,10 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container" style="margin-top: 50px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Poster une ressource</h4>
+                {{ form_start(forms) }}
+                {{ form_widget(forms) }}
+                    <div class="float-lg-right">
+                        <input type="submit" class="btn btn-primary" value="Suivant" />
+                    </div>
+                {{ form_end(forms) }}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(forms) }}
-    {{ form_widget(forms) }}
-    <input type="submit" class="btn btn-primary" value="Suivant" />
-    {{ form_end(forms) }}
+{% endblock %}
 
+{% block scripts %}
+    <script>
+        new SimpleMDE({
+            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "table", "|", "link", "image", "|", "preview", "guide"],
+            autosave: {
+                enabled: true,
+                uniqueId: 'shop_autosave'
+            },
+            forceSync: true,
+            delay: 1000
+        });
+
+    </script>
 {% endblock %}
