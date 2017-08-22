@@ -117,7 +117,7 @@ class ResourcesController extends Controller
                 $em->persist($resource);
                 $em->flush();
 
-                return $this->redirectToRoute('resources_view', array('id' => $resource->getId()));
+                return $this->redirectToRoute('resources_new_version', array('id' => $resource->getId()));
             }
 
         }
