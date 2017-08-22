@@ -1,8 +1,8 @@
 <?php
 
 namespace AppBundle\Controller;
+
 use AppBundle\Entity\Resource;
-use AppBundle\Entity\Review;
 use AppBundle\Entity\Version;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * @package AppBundle\Controller
  * @Route("/resources")
  */
-
 class ResourcesController extends Controller
 {
 
@@ -98,34 +97,9 @@ class ResourcesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($resource);
-            $em->flush();
-            return $this->redirectToRoute('resources_new_version', array('id' => $resource->getId()));
-        }
+            $file = $resource->getImage();
 
-        return $this->render('resource/new.html.twig', array(
-            'forms' => $form->createView()
-        ));
-    }
-
-    /**
-     * @Route("/{id}/new/version", name="resources_new_version")
-     * @param $id
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function newVersionAction(Resource $id, Request $request)
-    {
-        $version = new Version();
-        $form = $this->createForm('AppBundle\Form\VersionType', $version);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file = $version->getFile();
-
-
-            if (!in_array($file->guessExtension(), ['txt', 'zip']) || !in_array($file->getClientOriginalExtension(), ['sk', 'zip'])) {
+            if (!in_array($file->guessExtension(), ['png'])) {
                 $error = new FormError('Le fichier passé n\'est pas au bon format');
                 $form->addError($error);
             } else {
@@ -137,18 +111,18 @@ class ResourcesController extends Controller
                     $fileName
                 );
 
-                $version->setFile($fileName);
-                $version->setResource($id);
+                $resource->setImage($fileName);
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($version);
+                $em->persist($resource);
                 $em->flush();
-                return $this->redirectToRoute('resources_view', array('id' => $version->getResource()->getId()));
+
+                return $this->redirectToRoute('resources_view', array('id' => $resource->getId()));
             }
 
         }
 
-        return $this->render('resource/version.html.twig', array(
+        return $this->render('resource/new.html.twig', array(
             'forms' => $form->createView()
         ));
     }
