@@ -39,4 +39,19 @@ class ReviewController extends Controller
         ));
 
     }
+
+    /**
+     * @Route("/{id}/delete/review", name="resource_delete_review")
+     * @param Review $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+
+    public function newDeleteReview(Review $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($id);
+        $em->flush();
+
+        return $this->redirectToRoute("resources_index");
+    }
 }
