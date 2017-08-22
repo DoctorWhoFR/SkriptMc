@@ -18,7 +18,7 @@
             <div class="row">
                 {% for ressource in ressources %}
                 <div class="card">
-                    <img data-src="holder.js/100px280/thumb" alt="Card image cap">
+                    <img src="{{ ressource.image }}" alt="Card image cap" width="356" height="280">
                     <strong>{{ ressource.name }}</strong>
                     <p class="card-text">{{ ressource.description }}</p>
                     <a href="{{ path('resources_view', {id: ressource.id}) }}" class="btn btn-primary">Voir la ressource</a>
